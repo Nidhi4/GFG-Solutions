@@ -1,0 +1,113 @@
+/*
+ * main.c
+ *
+ *  Created on: 10-Aug-2020
+ *      Author: user
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+#include <stdlib.h>
+#define R 1000
+#define C 1000
+
+
+int kadane(int* arr, int n)
+{
+	int i = 0 ;
+	int sum = 0 ;
+	int maxSum = INT_MIN ;
+	int check = -1 ;
+
+	for(i=0 ; i<n ; ++i)
+	{
+		sum = sum + arr[i] ;
+
+		if(sum < 0)
+		{
+			sum = 0 ;
+		}
+		else if(sum > maxSum)
+		{
+			maxSum = sum ;
+			check = i ;
+		}
+	}
+	
+	// There is at-least one non-negative number
+	if(check != -1)
+	{
+	    return maxSum ;
+	}
+	
+	// Special Case: When all numbers in array are negative
+	maxSum = arr[0] ;
+	for(i=1 ; i<n ; ++i)
+	{
+	    if(arr[i] > maxSum)
+	    {
+	        maxSum = arr[i] ;
+	    }
+	}
+
+	return maxSum ;
+}
+
+void findMaxSum(int ROW, int COL, int M[][COL])
+{
+	int i = 0 ;
+	int sum = 0 ;
+	int maxSum = INT_MIN ;
+	int left = 0 ;
+	int right = 0 ;
+	int temp[ROW] ;
+
+	for(left=0 ; left<COL ; ++left)
+	{
+		memset(temp, 0, sizeof(temp));
+		for(right=left ; right<COL ; ++right)
+		{
+			for(i=0 ; i<ROW ; ++i)
+			{
+				temp[i] = temp[i] + M[i][right] ;
+			}
+			sum = kadane(temp, ROW) ;
+			if(sum > maxSum)
+			{
+				maxSum = sum ;
+			}
+		}
+	}
+	printf("%d\n", maxSum);
+}
+
+
+int main()
+{
+    int t = 0 ;
+    int i = 0 ;
+
+    scanf("%d", &t) ;
+    for(i=0 ; i<t ; ++i)
+    {
+        int ROW = 0 ;
+        int COL = 0 ;
+        int M[R][C] ;
+        int j = 0 ;
+        int k = 0 ;
+        scanf("%d %d", &ROW, &COL) ;
+
+        for(j=0 ; j<ROW ; ++j)
+        {
+            for(k=0 ; k<COL ; ++k)
+            {
+                scanf("%d", &M[j][k]) ;
+            }
+        }
+        findMaxSum(ROW, COL, M);
+
+    }
+
+    return 0;
+}
