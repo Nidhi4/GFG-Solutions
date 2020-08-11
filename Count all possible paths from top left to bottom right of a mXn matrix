@@ -1,0 +1,43 @@
+#include <stdio.h>
+#define M 20
+#define N 20
+
+int main(void) 
+{
+    int t = 0 ;
+    int x = 0 ;
+    
+    scanf("%d", &t) ;
+    for(x=0 ; x<t ; ++x)
+    {
+        int i = 0 ;
+    	int j = 0 ;
+    	int m = 0 ;
+    	int n = 0 ;
+    	int a[M][N] ;
+    	int sum = 0 ;
+    	
+    	scanf("%d %d", &m, &n) ;
+    	
+    	for(i=0 ; i<m ; ++i)
+    	{
+    	    a[i][0] = 1 ;
+    	}
+    	for(i=0 ; i<n ; ++i)
+    	{
+    	    a[0][i] = 1 ;
+    	}
+    	
+    	for(i=1 ; i<m ; ++i)
+    	{
+    	    for(j=1 ; j<n ; ++j)
+    	    {
+    	        a[i][j] = a[i][j-1] + a[i-1][j] ;
+    	    }
+    	}
+    	sum = a[m-1][n-1] ;
+    	printf("%d\n", sum) ;
+    }
+
+	return 0;
+}
