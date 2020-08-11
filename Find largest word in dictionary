@@ -1,0 +1,19 @@
+def isvalid(arr,s):
+    x=set(arr)
+    for i in x:
+        if arr.count(i)>s.count(i):
+            return False
+    return True
+
+for i in range(int(input())):
+    k=int(input())
+    arr=input().split()
+    s=input()
+    k=0
+    y=''
+    for i in arr:
+        if isvalid(i,s):
+            if len(i)>k:
+                k=len(i)
+                y=i
+    print(y)
