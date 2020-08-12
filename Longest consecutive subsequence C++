@@ -1,0 +1,60 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+// Returns length of the longest 
+// contiguous subsequence 
+int findLongestConseqSubseq(int arr[], int n) 
+{ 
+    int ans = 0, count = 0; 
+  
+    // sort the array 
+    sort(arr, arr + n); 
+  
+    // find the maximum length 
+    // by traversing the array 
+    for (int i = 0; i < n; i++) 
+    { 
+        if(arr[i] == arr[i-1])
+        {
+            ++count ;
+            ++i ;
+        }
+        else
+        {
+            // if the current element is equal 
+            // to previous element +1 
+            if (i > 0 && arr[i] == arr[i - 1] + 1) 
+                count++; 
+            // reset the count 
+            else
+                count = 1; 
+        }
+  
+        // update the maximum 
+        ans = max(ans, count); 
+    } 
+    return ans; 
+} 
+  
+// Driver program 
+int main() 
+{ 
+     int t;
+     cin>>t;
+     while(t--)
+     {
+         int n;
+         cin>>n;
+         int i ;
+         int arr[n];
+         int res ;
+         for(i=0;i<n;i++)
+         {
+             cin>>arr[i];
+         }
+         res = findLongestConseqSubseq(arr, n) ;
+         
+         cout<<res<<"\n" ; 
+     }
+	return 0; 
+} 
