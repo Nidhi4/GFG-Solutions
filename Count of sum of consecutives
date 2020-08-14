@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    double x=2;
+	    int ans=0;
+	    
+	    while(2*n+x-(x*x)>0)
+	    {
+	        double a=1.0*(x-(x*x)+(2*n))/(2*x);
+	        
+	        if(a-(int)a==0.0)
+	        {
+	            ans++;
+	        }
+	        x++;
+	    }
+	    cout<<ans<<endl;
+	}
+	return 0;
+}
