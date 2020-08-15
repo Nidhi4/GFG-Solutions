@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+long count = 0;
+
+void merge_sort (int arr[], int beg, int end) ;
+void merge (int arr[],int low,int mid,int high) ;
+long inversion_count(int a[],int n) ;
+
+int main(void)
+{
+	int t ;
+	scanf("%d", &t) ;
+	while(t--)
+	{
+	    int *arr ;
+	    int n = 0 ;
+	    int i = 0 ;
+	    //int ans = 0 ;
+
+	    scanf("%d", &n) ;
+	    arr = (int *)malloc(n*sizeof(int));
+	    for(i=0 ; i<n ; ++i)
+	    {
+	        scanf("%d", &arr[i]) ;
+	    }
+
+	    printf("%li\n",inversion_count(arr,n));
+	    free(arr);
+	}
+	return 0;
+}
+void merge_sort (int arr[], int beg, int end)
+{
+    int mid = 0 ;
+
+    mid = (beg+end)/2 ;
+    if(beg < end)
+    {
+        merge_sort(arr, beg, mid) ;
+        merge_sort(arr, mid+1, end) ;
+        merge(arr, beg, mid, end) ;
+    }
+    return ;
+}
+
+long inversion_count(int a[],int n)
+{
+    count=0;
+    merge_sort(a,0,n-1);
+    return count;
+}
+
+void merge (int arr[],int low,int mid,int high)
+{
+    int i = 0 ;
+    int j = 0 ;
+    int k = 0 ;
+    int left = 0 ;
+    int right = 0 ;
+    int *p = NULL ;
+    int *q = NULL ;
+    
+    left = mid - low + 1 ;
+    right = high - mid ;
+    k = low ;
+
+    p = (int *) malloc (left * sizeof(int)) ;
+    q = (int *) malloc (right * sizeof(int)) ;
+    
+    for(i=0 ; i<left ; ++i)
+    {
+        p[i] = arr[low+i] ;
+    }
+    for(i=0 ; i<right ; ++i)
+    {
+        q[i] = arr[mid+1+i] ;
+    }
+    
+    i = 0 ;
+    j = 0 ;
+    
+    while(i<left && j<right)
+    {
+        if(p[i] <= q[j])
+        {
+            arr[k] = p[i] ;
+            ++k ;
+            ++i ;
+        }
+        else
+        {
+            arr[k] = q[j] ;
+            ++k ;
+            ++j ;
+            count = count + left - i ;
+        }
+    }
+    
+    while(i < left)
+    {
+        arr[k] = p[i] ;
+        ++k ;
+        ++i ;
+    }
+    while(j < right)
+    {
+        arr[k] = q[j] ;
+        ++k ;
+        ++j ;
+    }
+
+    free (p) ;
+    free (q) ;
+    return ;
+}
+
+
+
