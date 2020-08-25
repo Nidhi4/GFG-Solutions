@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+	int t = 0 ;
+	cin >> t ;
+	while(t--)
+	{
+	    long long int n = 0 ;
+	    long long int m = 0 ;
+	    long long int res = 0 ;
+	    
+	    cin >> n ;
+	    if(n == 0)
+	    {
+	        cout << "NO" << endl ;
+	    }
+	    else
+	    {
+	        if(n == 1)
+	        {
+	            cout << "YES" << endl ;
+	        }
+	        else
+	        {
+	            m = n - 1 ;
+	            res = m&n ;
+	            if(res == 0)
+	            {
+	                cout << "YES" << endl ;
+	            }
+	            else
+	            {
+	                cout << "NO" << endl ;
+	            }
+	        }
+	    }
+
+	}
+	
+	return 0;
+}
