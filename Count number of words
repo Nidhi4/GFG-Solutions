@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() 
+{
+    int t;
+    cin>>t;
+    cin.ignore();
+    
+    while(t--)
+    {
+        int state = 0 ;
+        int count = 0 ; 
+        int i = 0 ;
+        string str ;
+        getline(cin,str) ;
+        
+        state = 1 ;
+        for(i=0 ; i<str.length() ; ++i)
+        {
+            if(str[i]==' ')
+            {
+                state = 1 ;
+            }
+            else if(str[i]=='\\')
+            {
+                if(str[i+1]=='t' || str[i+1]=='n')
+                {
+                    state = 1 ;
+                    ++i ;
+                }
+            }
+            else if(state == 1)
+            {
+                state = 0 ;
+                ++count ;
+            }
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}
